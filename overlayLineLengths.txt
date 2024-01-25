@@ -1,0 +1,39 @@
+function overlayLineLengths() {
+	getDimensions(width, height, channels, slices, frames)
+	x =  (width*height)/(1280*1026)
+	if (width*height > 1280*1026) {
+		setFont("Sanserif", 16*(x/2));
+	} else {
+		setFont("Sanserif", 16*(x));
+	}
+	n = roiManager("count");
+	getPixelSize(unit, pxWidth, pxHeight);
+	for(i=0; i<n; i++) {
+		roiManager("Select", i);
+		 List.setMeasurements;
+		 getLine(x1, y1, x2, y2, lineWidth);
+		 if (y2<y1 && x2<x1) {
+	 	 	run("Add Selection...");
+		 	makeText(d2s(List.getValue("Length"), 2)+ " "+unit, maxOf(x1, x2)+width*0.01, y1);
+		 	Roi.setFillColor("88000000");
+		 	run("Add Selection...");
+		 } else if (y1<y2 && x1<x2) {
+	 	 	run("Add Selection...");
+		 	makeText(d2s(List.getValue("Length"), 2)+ " "+unit, maxOf(x1, x2)+width*0.01, y2);
+		 	Roi.setFillColor("88000000");
+		 	run("Add Selection...");
+		 } else if (y1>y2 && x1<x2) {
+	 	 	run("Add Selection...");
+		 	makeText(d2s(List.getValue("Length"), 2)+ " "+unit, maxOf(x1, x2)+width*0.01, y2);
+		 	Roi.setFillColor("88000000");
+		 	run("Add Selection...");
+		 } else if (y2>y1 && x2<x1) {
+	 	 	run("Add Selection...");
+		 	makeText(d2s(List.getValue("Length"), 2)+ " "+unit, maxOf(x1, x2)+width*0.01, y1);
+		 	Roi.setFillColor("88000000");
+		 	run("Add Selection...");
+		 }
+	}
+}
+
+overlayLineLengths();
